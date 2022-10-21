@@ -43,7 +43,7 @@ function App() {
     setPikedCategory(category);
     setLetters(wordLetter);
 
-    setGameStage(stages[0].name);
+    setGameStage(stages[1].name);
   }, [pikedWordAndCategory]);
 
   const verifyLetter = (letter) => {

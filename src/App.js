@@ -24,6 +24,7 @@ function App() {
   const [wrongLetters, setWrongLetter] = useState([]);
   const [guesses, setGuesses] = useState(3);
   const [score, setScore] = useState(0);
+  const [palavra, setPalavra] = useState('');
 
   const pikedWordAndCategory = useCallback(() => {
     const categories = Object.keys(words)
@@ -37,7 +38,9 @@ function App() {
     const { word, category } = pikedWordAndCategory();
 
     let wordLetter = word.split('');
+    setPalavra(wordLetter)
     wordLetter = wordLetter.map((l) => l.toLowerCase())
+    
 
     setPickedWord(word);
     setPikedCategory(category);
@@ -49,7 +52,7 @@ function App() {
   const verifyLetter = (letter) => {
 
     const normalizedLetter = letter.toLowerCase();
-
+  
 
     if (guessedLetter.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)) {
       return
@@ -106,6 +109,8 @@ function App() {
   const exit = () => {
     setGameStage(stages[2].name)
   };
+
+
   return (
     <div className="App">
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
@@ -120,7 +125,7 @@ function App() {
         score={score}
         exit={exit}
       />}
-      {gameStage === 'end' && <GameOver retry={retry} score={score} />}
+      {gameStage === 'end' && <GameOver retry={retry} score={score} palavra={palavra} />}
     </div>
   );
 }
